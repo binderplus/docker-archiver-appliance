@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+    mgmt:
+        build: 
+            context: archappl
+        env_file: environment
+        environment:
+            - COMPONENT=mgmt
+        restart: unless-stopped
+        depends_on: 
+            - 'config_db'
+        network_mode: host
+        volumes: 
+            - './archappl/webapps/mgmt:/usr/local/tomcat/webapps'
+            - './archappl/conf:/usr/local/tomcat/archappl_conf'
+            - './archappl/storage/sts:/usr/local/tomcat/storage/sts'
+            - './archappl/storage/mts:/usr/local/tomcat/storage/mts'
+            - './archappl/storage/lts:/usr/local/tomcat/storage/lts'
+    engine:
+        build: 
+            context: archappl
+        env_file: environment
+        environment:
+            - COMPONENT=engine
+        restart: unless-stopped
+        depends_on: 
+            - 'config_db'
+        network_mode: host
+        volumes: 
+            - './archappl/webapps/engine:/usr/local/tomcat/webapps'
+            - './archappl/conf:/usr/local/tomcat/archappl_conf'
+            - './archappl/storage/sts:/usr/local/tomcat/storage/sts'
+            - './archappl/storage/mts:/usr/local/tomcat/storage/mts'
+            - './archappl/storage/lts:/usr/local/tomcat/storage/lts'
+    etl:
+        build: 
+            context: archappl
+        env_file: environment
+        environment:
+            - COMPONENT=etl
+        restart: unless-stopped
+        depends_on: 
+            - 'config_db'
+        network_mode: host
+        volumes: 
+            - './archappl/webapps/etl:/usr/local/tomcat/webapps'
+            - './archappl/conf:/usr/local/tomcat/archappl_conf'
+            - './archappl/storage/sts:/usr/local/tomcat/storage/sts'
+            - './archappl/storage/mts:/usr/local/tomcat/storage/mts'
+            - './archappl/storage/lts:/usr/local/tomcat/storage/lts'
+    retrieval:
+        build: 
+            context: archappl
+        env_file: environment
+        environment:
+            - COMPONENT=retrieval
+        restart: unless-stopped
+        depends_on: 
+            - 'config_db'
+        network_mode: host
+        volumes: 
+            - './archappl/webapps/retrieval:/usr/local/tomcat/webapps'
+            - './archappl/conf:/usr/local/tomcat/archappl_conf'
+            - './archappl/storage/sts:/usr/local/tomcat/storage/sts'
+            - './archappl/storage/mts:/usr/local/tomcat/storage/mts'
+            - './archappl/storage/lts:/usr/local/tomcat/storage/lts'
+    config_db:
+        build: config_db
+        env_file: environment
+        restart: unless-stopped
+        volumes:
+            - './config_db/storage:/var/lib/mysql'
+        network_mode: host

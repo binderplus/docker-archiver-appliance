@@ -1,0 +1,6 @@
+archappl/webapps/mgmt/
+archappl/webapps/engine/
+archappl/webapps/etl/
+archappl/webapps/retrieval/
+archappl/storage/
+config_db/storage/
