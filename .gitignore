@@ -1,4 +1,11 @@
-archappl/webapps/
+archappl/webapps/mgmt/*
+archappl/webapps/etl/*
+archappl/webapps/retrieval/*
+archappl/webapps/engine/*
+!archappl/webapps/mgmt/mgmt.war
+!archappl/webapps/etl/etl.war
+!archappl/webapps/retrieval/retrieval.war
+!archappl/webapps/engine/engine.war
 archappl/conf
 archappl/storage/
 config_db/storage/
