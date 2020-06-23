@@ -9,4 +9,4 @@ archappl/webapps/engine/*
 archappl/conf
 archappl/storage/
 config_db/storage/
-environment
+.env
