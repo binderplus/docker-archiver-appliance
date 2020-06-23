@@ -3,7 +3,7 @@ services:
     mgmt:
         build: 
             context: archappl
-        env_file: environment
+        env_file: .env
         environment:
             - COMPONENT=mgmt
         restart: unless-stopped
@@ -13,13 +13,13 @@ services:
         volumes: 
             - ./archappl/webapps/mgmt:/usr/local/tomcat/webapps
             - ./archappl/conf:/usr/local/tomcat/archappl_conf
-            - ./archappl/storage/sts:/usr/local/tomcat/storage/sts
-            - ./archappl/storage/mts:/usr/local/tomcat/storage/mts
-            - ./archappl/storage/lts:/usr/local/tomcat/storage/lts
+            - ${STS_PATH}:/usr/local/tomcat/storage/sts
+            - ${MTS_PATH}:/usr/local/tomcat/storage/mts
+            - ${LTS_PATH}:/usr/local/tomcat/storage/lts
     engine:
         build: 
             context: archappl
-        env_file: environment
+        env_file: .env
         environment:
             - COMPONENT=engine
         restart: unless-stopped
@@ -29,13 +29,13 @@ services:
         volumes: 
             - ./archappl/webapps/engine:/usr/local/tomcat/webapps
             - ./archappl/conf:/usr/local/tomcat/archappl_conf
-            - ./archappl/storage/sts:/usr/local/tomcat/storage/sts
-            - ./archappl/storage/mts:/usr/local/tomcat/storage/mts
-            - ./archappl/storage/lts:/usr/local/tomcat/storage/lts
+            - ${STS_PATH}:/usr/local/tomcat/storage/sts
+            - ${MTS_PATH}:/usr/local/tomcat/storage/mts
+            - ${LTS_PATH}:/usr/local/tomcat/storage/lts
     etl:
         build: 
             context: archappl
-        env_file: environment
+        env_file: .env
         environment:
             - COMPONENT=etl
         restart: unless-stopped
@@ -45,13 +45,13 @@ services:
         volumes: 
             - ./archappl/webapps/etl:/usr/local/tomcat/webapps
             - ./archappl/conf:/usr/local/tomcat/archappl_conf
-            - ./archappl/storage/sts:/usr/local/tomcat/storage/sts
-            - ./archappl/storage/mts:/usr/local/tomcat/storage/mts
-            - ./archappl/storage/lts:/usr/local/tomcat/storage/lts
+            - ${STS_PATH}:/usr/local/tomcat/storage/sts
+            - ${MTS_PATH}:/usr/local/tomcat/storage/mts
+            - ${LTS_PATH}:/usr/local/tomcat/storage/lts
     retrieval:
         build: 
             context: archappl
-        env_file: environment
+        env_file: .env
         environment:
             - COMPONENT=retrieval
         restart: unless-stopped
@@ -61,13 +61,13 @@ services:
         volumes: 
             - ./archappl/webapps/retrieval:/usr/local/tomcat/webapps
             - ./archappl/conf:/usr/local/tomcat/archappl_conf
-            - ./archappl/storage/sts:/usr/local/tomcat/storage/sts
-            - ./archappl/storage/mts:/usr/local/tomcat/storage/mts
-            - ./archappl/storage/lts:/usr/local/tomcat/storage/lts
+            - ${STS_PATH}:/usr/local/tomcat/storage/sts
+            - ${MTS_PATH}:/usr/local/tomcat/storage/mts
+            - ${LTS_PATH}:/usr/local/tomcat/storage/lts
     config_db:
         build: config_db
-        env_file: environment
+        env_file: .env
         restart: unless-stopped
         volumes:
-            - ./config_db/storage:/var/lib/mysql
+            - ${CONFIG_DB_PATH}:/var/lib/mysql
         network_mode: host
